@@ -1,0 +1,68 @@
+select * from superhero
+select * from hero_power
+select * from superpower
+
+select * from superhero as s
+inner join hero_power as hp on s.id=hp.hero_id
+inner join superpower as sp on hp.power_id=sp.id
+
+select s.id, s.superhero_name, sp.power_name from superhero s
+inner join hero_power hp on s.id=hp.hero_id
+inner join superpower sp on hp.power_id=sp.id
+
+
+
+select * from superhero
+select * from publisher
+select * from gender
+
+select * from superhero as s
+inner join publisher as p on s.publisher_id=p.id
+inner join gender as g on s.gender_id=g.id
+
+select * from (
+select p.publisher_name, s.superhero_name, g.gender from superhero s
+inner join publisher p on s.publisher_id=p.id
+inner join gender g on s.gender_id=g.id
+) result
+PIVOT(
+count(superhero_name)
+for gender in ([Male],[Female])
+)pivot_table
+
+
+
+select * from superhero
+select * from colour
+
+select * from superhero as s
+inner join colour as c on s.skin_colour_id=c.id
+
+select s.id, s.superhero_name, c.colour from superhero as s
+inner join colour as c on s.skin_colour_id=c.id
+
+
+
+select * from superhero
+select * from hero_attribute
+select * from attribute
+
+select * from superhero as s
+inner join hero_attribute as ha on s.id=ha.hero_id
+inner join attribute as a on ha.attribute_id=a.id
+
+select s.superhero_name, a.attribute_name, ha.attribute_value from superhero as s
+inner join hero_attribute as ha on s.id=ha.hero_id
+inner join attribute as a on ha.attribute_id=a.id
+order by s.superhero_name
+
+
+
+select * from superhero
+select * from alignment
+
+select * from superhero as s
+inner join alignment as a on s.alignment_id=a.id
+
+select s.superhero_name, a.alignment from superhero as s
+inner join alignment as a on s.alignment_id=a.id
